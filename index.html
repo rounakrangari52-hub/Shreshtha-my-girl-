@@ -1,38 +1,123 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For My Girl ❤️</title>
-    <style>
-        body{
-            background: pink;
-            font-family: Arial;
-            text-align:center;
-            padding-top:100px;
-        }
-        h1{
-            font-size:40px;
-            color:white;
-        }
-        p{
-            font-size:22px;
-            color:white;
-            width:80%;
-            margin:auto;
-        }
-    </style>
+<title>For My Love ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial;
+    text-align:center;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+/* heading */
+h1{
+    color:white;
+    margin-top:30px;
+}
+
+/* photos */
+img{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    margin:15px;
+    object-fit:cover;
+    border:4px solid white;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+/* heart button */
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:30px;
+    background:red;
+    color:white;
+    cursor:pointer;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* letter popup */
+#letter{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    width:85%;
+    max-width:320px;
+    box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    font-size:22px;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+</style>
 </head>
+
 <body>
 
-<h1>❤️ For You Shrestha ❤️</h1>
+<h1>Hi My Beautiful ❤️</h1>
 
+<!-- YOUR REAL IMAGES ALREADY ADDED -->
+<img src="IMG_20260216_220328.jpg">
+<img src="Videoshot_20260208_132619.jpg">
+
+<br><br>
+
+<button onclick="showLetter()">Open My Heart 💌</button>
+
+<div id="letter">
+<h3>My Love Letter</h3>
 <p>
-From the day you came into my life everything became beautiful  
-your smile makes my day better your voice gives me peace  
-you are my happiness my comfort my safe place  
-I promise to always stand with you and love you forever  
-this small website is just a tiny surprise to show how special you are to me ❤️
+From the day you came into my life everything became brighter  
+your smile is my peace your voice is my favorite sound  
+I feel lucky every single day to have you  
+I promise to love you forever and always ❤️
 </p>
+<button onclick="closeLetter()">Close</button>
+</div>
+
+<script>
+function showLetter(){
+    document.getElementById("letter").style.display="block";
+}
+
+function closeLetter(){
+    document.getElementById("letter").style.display="none";
+}
+
+/* floating hearts animation */
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+},300);
+</script>
 
 </body>
 </html>
