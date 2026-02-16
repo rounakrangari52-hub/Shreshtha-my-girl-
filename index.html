@@ -10,62 +10,73 @@ body{
     text-align:center;
     background: linear-gradient(135deg,#ff9a9e,#fad0c4);
     overflow:hidden;
-}
-
-/* heading */
-h1{
     color:white;
-    margin-top:30px;
 }
 
-/* photos */
-img{
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    margin:15px;
-    object-fit:cover;
-    border:4px solid white;
-    box-shadow:0 0 15px rgba(0,0,0,0.3);
+/* password screen */
+#lock{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:#ff6b81;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
-/* heart button */
-button{
-    padding:15px 30px;
-    font-size:20px;
+input{
+    padding:10px;
+    font-size:18px;
+    border-radius:10px;
     border:none;
-    border-radius:30px;
+    margin-top:10px;
+}
+
+button{
+    padding:12px 25px;
+    margin-top:15px;
+    border:none;
+    border-radius:20px;
+    font-size:18px;
     background:red;
     color:white;
-    cursor:pointer;
-    animation:pulse 1s infinite;
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
-
-/* letter popup */
-#letter{
+/* main content */
+#main{
     display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    width:85%;
-    max-width:320px;
-    box-shadow:0 0 25px rgba(0,0,0,0.4);
+    padding-top:30px;
 }
 
-/* floating hearts */
+/* slideshow */
+#slider{
+    width:200px;
+    height:200px;
+    margin:auto;
+}
+
+#slider img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid white;
+}
+
+/* typing text */
+#typing{
+    margin-top:20px;
+    font-size:20px;
+    width:85%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* hearts */
 .heart{
     position:absolute;
-    font-size:22px;
+    font-size:20px;
     animation:float 5s linear infinite;
 }
 
@@ -78,44 +89,74 @@ button{
 
 <body>
 
-<h1>Hi My Beautiful ❤️</h1>
-
-<!-- YOUR REAL IMAGES ALREADY ADDED -->
-<img src="IMG_20260216_220328.jpg">
-<img src="Videoshot_20260208_132619.jpg">
-
-<br><br>
-
-<button onclick="showLetter()">Open My Heart 💌</button>
-
-<div id="letter">
-<h3>My Love Letter</h3>
-<p>
-From the day you came into my life everything became brighter  
-your smile is my peace your voice is my favorite sound  
-I feel lucky every single day to have you  
-I promise to love you forever and always ❤️
-</p>
-<button onclick="closeLetter()">Close</button>
+<!-- PASSWORD SCREEN -->
+<div id="lock">
+<h2>Enter Password ❤️</h2>
+<input type="password" id="pass" placeholder="Password">
+<button onclick="unlock()">Open</button>
 </div>
 
+
+<!-- MAIN WEBSITE -->
+<div id="main">
+
+<h1>Hi My Love ❤️</h1>
+
+<div id="slider">
+<img id="slideImg" src="IMG_20260216_220328.jpg">
+</div>
+
+<p id="typing"></p>
+
+</div>
+
+
 <script>
-function showLetter(){
-    document.getElementById("letter").style.display="block";
+/* PASSWORD */
+function unlock(){
+    if(document.getElementById("pass").value === "iloveyou"){
+        document.getElementById("lock").style.display="none";
+        document.getElementById("main").style.display="block";
+    } else {
+        alert("Wrong password 😜");
+    }
 }
 
-function closeLetter(){
-    document.getElementById("letter").style.display="none";
-}
+/* SLIDESHOW */
+let images = [
+"IMG_20260216_220328.jpg",
+"Videoshot_20260208_132619.jpg"
+];
 
-/* floating hearts animation */
+let i=0;
 setInterval(()=>{
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
+    i=(i+1)%images.length;
+    document.getElementById("slideImg").src=images[i];
+},2000);
+
+
+/* TYPING ANIMATION */
+let text="You are my happiness my peace my smile and my forever I love you more than anything in this world ❤️";
+let j=0;
+
+function type(){
+    if(j<text.length){
+        document.getElementById("typing").innerHTML += text.charAt(j);
+        j++;
+        setTimeout(type,50);
+    }
+}
+type();
+
+
+/* HEARTS */
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
 },300);
 </script>
 
